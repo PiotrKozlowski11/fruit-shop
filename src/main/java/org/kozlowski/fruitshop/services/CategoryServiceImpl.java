@@ -3,10 +3,12 @@ package org.kozlowski.fruitshop.services;
 import org.kozlowski.fruitshop.api.mapper.CategoryMapper;
 import org.kozlowski.fruitshop.api.model.CategoryDTO;
 import org.kozlowski.fruitshop.respositories.CategoryRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryMapper categoryMapper;
