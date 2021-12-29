@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.kozlowski.fruitshop.api.model.CategoryDTO;
 import org.kozlowski.fruitshop.domain.Category;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CategoryMapperTest {
 
@@ -13,6 +13,7 @@ class CategoryMapperTest {
     public static final long ID = 1L;
 
     CategoryMapper categoryMapper;
+
     @BeforeEach
     void setUp() {
 

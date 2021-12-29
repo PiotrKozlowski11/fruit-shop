@@ -28,12 +28,11 @@ class CategoryServiceImplTest {
     CategoryRepository categoryRepository;
 
 
-
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        categoryService = new CategoryServiceImpl(CategoryMapper.INSTANCE,categoryRepository);
+        categoryService = new CategoryServiceImpl(CategoryMapper.INSTANCE, categoryRepository);
     }
 
     @Test
@@ -44,7 +43,7 @@ class CategoryServiceImplTest {
         when(categoryRepository.findAll()).thenReturn(categoryList);
 
         //when
-        List<CategoryDTO> categoryDTOS =categoryService.getAllCategories();
+        List<CategoryDTO> categoryDTOS = categoryService.getAllCategories();
 
 
         //then

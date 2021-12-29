@@ -8,8 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class FruitShopApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }
