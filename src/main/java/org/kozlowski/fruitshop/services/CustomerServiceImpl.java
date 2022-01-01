@@ -2,6 +2,7 @@ package org.kozlowski.fruitshop.services;
 
 import org.kozlowski.fruitshop.api.mapper.CustomerMapper;
 import org.kozlowski.fruitshop.api.model.CustomerDTO;
+import org.kozlowski.fruitshop.domain.Customer;
 import org.kozlowski.fruitshop.respositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +39,19 @@ public class CustomerServiceImpl implements CustomerService {
                     return customerDTO;
                 })
                 .orElseThrow(RuntimeException::new);
+    }
+
+    @Override
+    public CustomerDTO createNewCustomer(CustomerDTO customerDTO) {
+        Customer customer = customerMapper.customerDTOToCustomer(customerDTO);
+
+        Customer savedCustomer = customerRepository.save(customer);
+
+        CustomerDTO returnedDTO = customerMapper.customerToCustomerDTO(savedCustomer);
+
+        returnedDTO.setCustomerUrl("/api/customer/" + savedCustomer.getId());
+
+
+        return returnedDTO;
     }
 }

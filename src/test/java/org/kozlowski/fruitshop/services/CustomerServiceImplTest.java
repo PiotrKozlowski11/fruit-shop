@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
@@ -36,7 +37,7 @@ class CustomerServiceImplTest {
     }
 
     @Test
-    void getAllCustomers() {
+    void testGetAllCustomers() {
 
         //given
         List<Customer> customerList = Arrays.asList(new Customer(), new Customer(), new Customer());
@@ -54,7 +55,7 @@ class CustomerServiceImplTest {
     }
 
     @Test
-    void getCustomerById() {
+    void testGetCustomerById() {
         //given
         Customer customer = new Customer();
         customer.setId(ID);
@@ -67,8 +68,33 @@ class CustomerServiceImplTest {
         CustomerDTO customerDTO = customerService.getCustomerById(ID);
 
         //then
-        assertEquals(ID, customer.getId());
-        assertEquals(FIRST_NAME, customer.getFirstName());
-        assertEquals(LAST_NAME, customer.getLastName());
+        assertEquals(FIRST_NAME, customerDTO.getFirstName());
+        assertEquals(LAST_NAME, customerDTO.getLastName());
+    }
+
+
+    @Test
+    void createNewCustomer() {
+        //given
+        Customer customer = new Customer();
+        customer.setId(ID);
+        customer.setFirstName(FIRST_NAME);
+        customer.setLastName(LAST_NAME);
+
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setFirstName(customer.getFirstName());
+        customerDTO.setLastName(customer.getLastName());
+
+        when(customerRepository.save(any())).thenReturn(customer);
+
+        //when
+        CustomerDTO customerReturned = customerService.createNewCustomer(customerDTO);
+
+
+        //then
+        assertEquals(customerDTO.getFirstName(), customerReturned.getFirstName());
+        assertEquals("/api/customer/" + ID, customerReturned.getCustomerUrl());
+
+
     }
 }
