@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api/customers/")
+@RequestMapping("/api/customers")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -28,7 +28,7 @@ public class CustomerController {
 
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable Long id) {
 
         return new ResponseEntity<>(
@@ -45,6 +45,14 @@ public class CustomerController {
                 customerService.createNewCustomer(customerDTO), HttpStatus.CREATED
         );
 
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable Long id,
+                                                      @RequestBody CustomerDTO customerDTO) {
+        return new ResponseEntity<>(
+                customerService.saveCustomerByDTO(id, customerDTO), HttpStatus.OK
+        );
     }
 
 }
