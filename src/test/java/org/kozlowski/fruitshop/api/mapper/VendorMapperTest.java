@@ -28,7 +28,7 @@ class VendorMapperTest {
         //when
         VendorDTO vendorDTO = vendorMapper.vendorToVendorDTO(vendor);
 
-        assertEquals(NAME,vendorDTO.getName());
+        assertEquals(NAME, vendorDTO.getName());
     }
 
     @Test
@@ -40,6 +40,6 @@ class VendorMapperTest {
         //when
         Vendor vendor = vendorMapper.vendorDTOToVendor(vendorDTO);
 
-        assertEquals(NAME,vendor.getName());
+        assertEquals(NAME, vendor.getName());
     }
 }
