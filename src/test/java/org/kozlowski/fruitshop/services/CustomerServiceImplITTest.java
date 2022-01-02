@@ -10,6 +10,7 @@ import org.kozlowski.fruitshop.bootstrap.Bootstrap;
 import org.kozlowski.fruitshop.domain.Customer;
 import org.kozlowski.fruitshop.respositories.CategoryRepository;
 import org.kozlowski.fruitshop.respositories.CustomerRepository;
+import org.kozlowski.fruitshop.respositories.VendorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -33,6 +34,9 @@ public class CustomerServiceImplITTest {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @Autowired
+    VendorRepository vendorRepository;
+
     CustomerService customerService;
 
     @BeforeAll
@@ -41,7 +45,7 @@ public class CustomerServiceImplITTest {
         System.out.println(customerRepository.findAll().size());
 
         //setup data for testing
-        Bootstrap bootstrap = new Bootstrap(categoryRepository, customerRepository);
+        Bootstrap bootstrap = new Bootstrap(categoryRepository, customerRepository, vendorRepository);
         bootstrap.run(); //load data
 
         customerService = new CustomerServiceImpl(customerRepository, CustomerMapper.INSTANCE);
