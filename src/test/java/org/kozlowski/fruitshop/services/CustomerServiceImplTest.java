@@ -123,9 +123,9 @@ class CustomerServiceImplTest {
 
     @Test
     void deleteCustomerById() {
-        Long id = 1L;
+        when(customerRepository.findById(ID)).thenReturn(Optional.of(new Customer()));
 
-        customerRepository.deleteById(id);
+        customerService.deleteCustomerById(ID);
 
         verify(customerRepository, times(1)).deleteById(anyLong());
     }
